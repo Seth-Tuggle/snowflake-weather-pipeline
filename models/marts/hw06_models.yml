@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: dt_weather_analysis_base
+    description: Dynamic table that denormalizes hourly weather observations with calendar, time, and location dimensions for HW06 aggregate analysis.
+    columns:
+      - name: weather_observation_key
+        description: Deterministic hash key for the weather observation grain.
+        data_tests:
+          - not_null
+      - name: day_key
+        description: Calendar day for the observation in YYYYMMDD format.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('weather_dw', 'dim_day')
+                field: day_key
+      - name: minute_key
+        description: Minute-of-day key for the observation.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('weather_dw', 'dim_minute')
+                field: minute_key
+      - name: location_key
+        description: Surrogate key for the weather location.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('weather_dw', 'dim_location')
+                field: location_key
+      - name: temperature_f
+        description: Hourly ambient temperature in degrees Fahrenheit.
+        data_tests:
+          - not_null
+      - name: precipitation_in
+        description: Hourly precipitation in inches.
+        data_tests:
+          - not_null
+
+  - name: weather_analysis_base
+    description: Helper table populated from the dynamic table so Snowflake materialized views can aggregate from a single base relation.
+    columns:
+      - name: weather_observation_key
+        description: Deterministic hash key for the weather observation grain.
+        data_tests:
+          - not_null
+      - name: month_key
+        description: Numeric month for aggregate rollups.
+        data_tests:
+          - not_null
+      - name: city_name
+        description: City used for monthly aggregate comparisons.
+        data_tests:
+          - not_null

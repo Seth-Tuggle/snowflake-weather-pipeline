@@ -1,0 +1,11 @@
+location_key,city_name,state_name,country_name,latitude,longitude,elevation_m,climate_category,climate_category_order,location_label
+1,Radford,VA,USA,37.1318,-80.5764,573,Appalachian,1,"Radford, VA"
+2,Phoenix,AZ,USA,33.4484,-112.0740,331,Desert,3,"Phoenix, AZ"
+3,Chicago,IL,USA,41.8781,-87.6298,181,Continental,2,"Chicago, IL"
+4,Miami,FL,USA,25.7617,-80.1918,2,Tropical,6,"Miami, FL"
+5,Seattle,WA,USA,47.6062,-122.3321,56,Marine,4,"Seattle, WA"
+6,Charlotte,NC,USA,35.2271,-80.8431,229,Southeastern,5,"Charlotte, NC"
+7,Raleigh,NC,USA,35.7796,-78.6382,96,Southeastern,5,"Raleigh, NC"
+8,Asheville,NC,USA,35.5951,-82.5515,650,Appalachian,1,"Asheville, NC"
+9,Atlanta,GA,USA,33.7490,-84.3880,320,Southeastern,5,"Atlanta, GA"
+10,Nashville,TN,USA,36.1627,-86.7816,182,Continental,2,"Nashville, TN"

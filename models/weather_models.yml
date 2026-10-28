@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fct_weather_daily_snapshot
+    description: Daily periodic snapshot with one row per city per day.
+    columns:
+      - name: day_key
+        description: Calendar day for the snapshot in YYYYMMDD format.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('weather_dw', 'dim_day')
+                field: day_key
+      - name: location_key
+        description: Surrogate key for the weather location.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('weather_dw', 'dim_location')
+                field: location_key
+      - name: min_temperature
+        description: Minimum hourly temperature recorded for the city on that day.
+        data_tests:
+          - not_null
+      - name: max_temperature
+        description: Maximum hourly temperature recorded for the city on that day.
+        data_tests:
+          - not_null
+      - name: total_temperature
+        description: Sum of hourly temperatures for the city on that day.
+        data_tests:
+          - not_null
+      - name: observation_count
+        description: Number of temperature observations rolled into the daily snapshot.
+        data_tests:
+          - not_null

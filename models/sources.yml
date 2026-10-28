@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: weather_raw
+    database: WEATHER_DB
+    schema: RAW
+    tables:
+      - name: stg_weather_hourly_raw
+
+  - name: weather_dw
+    database: WEATHER_DB
+    schema: RAW
+    tables:
+      - name: dim_day
+      - name: dim_minute
+      - name: dim_location
