@@ -1,29 +1,37 @@
 # Snowflake Weather Pipeline
 
-A weather data engineering project from CS542: Open-Meteo observations flow
-through Python ingestion into Snowflake and dbt staging, fact, snapshot, and
-analytical models.
+My CS542 project follows weather observations from Open-Meteo through Python
+ingestion, Snowflake storage, and dbt models. I use it to explore how hourly data
+can become observation facts, daily snapshots, and analytical tables.
 
-## Included work
+## What's included
 
-- Rolling-window, idempotent MERGE ingestion with key-pair authentication.
-- Observation facts, daily snapshot models, analytical marts, and aggregate SQL.
-- Grain validation queries, YAML model definitions, and dimension generators.
+- Rolling-window ingestion that uses MERGE to avoid duplicate observations.
+- Key-pair authentication, dbt staging and fact models, and aggregate SQL.
+- Dimension generators, model definitions, and queries for checking table grain.
 
 ## Setup
 
 1. Create a Python environment and install `requirements.txt`.
-2. Supply your own Snowflake account, role, warehouse, and key pair. The examples
-   use `WEATHER_DB`; they do not refer to the former school database.
-3. Export the variables documented in `.env.example`. The ingest script reads
-   process environment variables; it does not automatically load that file.
-4. Configure a local dbt `profiles.yml` using `profiles.example.yml` as a guide.
-5. Create/populate the raw and dimension tables referenced by `models/sources.yml`.
-   The `dimensions/` scripts and sample location CSV support this step. The
-   recovered aggregate SQL assumes existing source/fact tables; it is not a
-   complete empty-account bootstrap migration.
+2. Set up your own Snowflake account, role, warehouse, and key pair. My example
+   configuration uses `WEATHER_DB`.
+3. Export the variables listed in `.env.example`. The ingestion script reads
+   process environment variables; it doesn't load that file automatically.
+4. Configure your local dbt `profiles.yml` using `profiles.example.yml` as a guide.
+5. Create and populate the raw and dimension tables in `models/sources.yml`.
+   The scripts and sample location CSV in `dimensions/` can help with this step.
 6. Run `python weather_ingest.py`, then `dbt run --select stg_weather_hourly+`.
-   Run relevant validation with `dbt test` after preparing the database.
+   Once the database is ready, use `dbt test` to run the model checks.
 
-The shell runner requires an already configured environment. Staging cleanup is
-manual to avoid silently removing data. No cloud commands were run during recovery.
+## Things to know
+
+The aggregate SQL assumes that source and fact tables already exist. I haven't
+included a complete setup migration for an empty Snowflake account, so review the
+table requirements before running it.
+
+The shell runner also needs a configured environment. I keep staging cleanup as
+a separate manual step so running the pipeline doesn't silently remove data.
+
+## Ownership
+
+For details about my contributions and project attribution, see [CREDITS.md](CREDITS.md).
