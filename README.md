@@ -27,5 +27,3 @@ analytical models.
 
 The shell runner requires an already configured environment. Staging cleanup is
 manual to avoid silently removing data. No cloud commands were run during recovery.
-
-See `RECOVERY_NOTES.md` for snapshot provenance.
